@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Master</title>
+    <style>
+        body {
+            font-size: 15pt;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+            width: 100%;
+            position: absolute;
+            top: 25%;
+            /* Position at 3/4 of the page */
+            transform: translateY(-50%);
+        }
+
+        .login-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            font-size: 12pt;
+            text-decoration: none;
+            color: white;
+            background-color: #007BFF;
+            border-radius: 5px;
+        }
+
+        .login-button:hover {
+            background-color: #0056b3;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        input[type="number"],
+        input[type="text"] {
+            padding: 10px;
+            font-size: 12pt;
+            margin: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 200px;
+        }
+
+        input[type="submit"] {
+            padding: 10px 20px;
+            font-size: 12pt;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="/login" class="login-button">Login</a> <!-- Login button at the upper right corner -->
+
+    <div class="container">
+        <h1>Hotel Master</h1>
+        <!-- Form for searching hotels -->
+        <form method="GET" action="/search_hotel">
+            <input type="number" name="star_rating" placeholder="Star Rating (1-5)" min="1" max="5" required>
+            <input type="date" name="excluded_time" required>
+            <input type="submit" value="Search">
+        </form>
+
+
+        <!-- Display search results if available -->
+        {% if results %}
+        <h2>Search Results</h2>
+        <table border="1">
+            <tr>
+                <th>Hotel ID</th>
+                <th>Name</th>
+                <th>Star Rating</th>
+                <th>Phone Number</th>
+                <th>Address</th>
+                <th>Email</th>
+                <th>Room ID</th>
+                <th>Time</th>
+            </tr>
+            {% for row in results %}
+            <tr>
+                <td>{{ row.hotel_id }}</td>
+                <td>{{ row.name }}</td>
+                <td>{{ row.star_rating }}</td>
+                <td>{{ row.phone_number }}</td>
+                <td>{{ row.address }}</td>
+                <td>{{ row.email }}</td>
+                <td>{{ row.room_id }}</td>
+                <td>{{ row.time }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+    </div>
+
+
+
+    <!-- <p><a href="/another">Go to the other page</a></p> -->
+    </div>
+</body>
+
+</html>
